@@ -31,12 +31,24 @@ or directlt download model from:
 https://dl.fbaipublicfiles.com/detectron2/Misc/cascade_mask_rcnn_R_50_FPN_3x/144998488/model_final_480dd8.pkl
 
 ### 3.2 Train:
+
 ```
 python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS model_final_480dd8.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm"
 ```
 
-
-
+To Change the category size, edit the file detectron2\data\datasets\coco.py as follow:
+```
+def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_keys=None):
+  ...
+   VALID_CLASSES = ('Pedestrian','Cyclist','Car','Truck','Van')
+```
+or only consider Pedestrain:
+```
+def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_keys=None):
+  ...
+   VALID_CLASSES = ('Pedestrian')
+```
+In this case, data loader will consider all the images in validation set. Even only the category 'Pedestrain' is considered in training and some images do not contain category 'Pedestrain'.
 
 ## Acknowledgement
 * [detectron2](https://github.com/facebookresearch/detectron2)
