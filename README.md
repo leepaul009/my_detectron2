@@ -26,24 +26,31 @@ pip install -e .
 
 ## 3 Train and inference
 ### 3.1 Download pre-trained model:
-you can download model from https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md.
+You can download model from https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md.
 or directlt download model from:
 https://dl.fbaipublicfiles.com/detectron2/Misc/cascade_mask_rcnn_R_50_FPN_3x/144998488/model_final_480dd8.pkl
 
-### 3.2 Train:
-
+### 3.2 Training
+Use pretrained model, model_final_480dd8.pkl, to train on the dhd dataset:
 ```
 python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS model_final_480dd8.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm"
 ```
-### 3.3 Change category in training
+
+### 3.3 Inference
+Inference result will be located in OUTPUT_DIR.
+```
+python tools/train_net.py    --config-file configs/Ped/base.yaml   --eval-only   MODEL.WEIGHTS {path to model, pth file}   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_inference"
+```
+
+### 3.4 Change category in training
 #### Consider all the categories
-edit the file detectron2\data\datasets\coco.py as follow:
+Edit the file detectron2\data\datasets\coco.py as follow:
 ```
 def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_keys=None):
   ...
    VALID_CLASSES = ('Pedestrian','Cyclist','Car','Truck','Van')
 ```
-and edit the file detectron2\data\datasets\builtin_meta.py as follow:
+And edit the file detectron2\data\datasets\builtin_meta.py as follow:
 ```
 COCO_CATEGORIES = [
     {"color": [220, 20, 60], "isthing": 1, "id": 1, "name": "Pedestrian"},
@@ -54,13 +61,13 @@ COCO_CATEGORIES = [
 ]
 ```
 #### or only consider Pedestrain in training
-edit the file detectron2\data\datasets\coco.py as follow:
+Edit the file detectron2\data\datasets\coco.py as follow:
 ```
 def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_keys=None):
   ...
    VALID_CLASSES = ('Pedestrian')
 ```
-and edit the file detectron2\data\datasets\builtin_meta.py as follow:
+And edit the file detectron2\data\datasets\builtin_meta.py as follow:
 ```
 COCO_CATEGORIES = [
     {"color": [220, 20, 60], "isthing": 1, "id": 1, "name": "Pedestrian"},
