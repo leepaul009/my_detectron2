@@ -35,6 +35,7 @@ Use pretrained model, model_final_480dd8.pkl, to train on the dhd dataset:
 ```
 python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS model_final_480dd8.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm"
 ```
+I got best result at 25999 steps.
 
 ### 3.3 Inference
 Inference result will be located in OUTPUT_DIR.
