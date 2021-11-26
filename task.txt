@@ -1,0 +1,45 @@
+
+
+1) cascade_mask_rcnn:
+    
+    #### Debug:
+        python tools/train_net.py    --config-file configs/Ped/base.yaml   SOLVER.IMS_PER_BATCH 2   MODEL.WEIGHTS cascade_mask_rcnn_R_50_FPN_3x.pkl   OUTPUT_DIR "Experiments/debug"
+
+    #### R50:
+        python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS cascade_mask_rcnn_R_50_FPN_3x.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm"
+
+        ## train from beginning:
+        nohup python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS cascade_mask_rcnn_R_50_FPN_3x.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm" >> cascade_mask_rcnn_r_50_norm.log 2>&1 &
+
+        ## fine tune:
+        nohup python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS Experiments/cascade_mask_rcnn/r_50_norm/model_0023999.pth   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_finetune" >> cascade_mask_rcnn_r_50_finetune.log 2>&1 &
+
+        ## 2 cates
+        #### train from beginning:
+            nohup python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   MODEL.WEIGHTS cascade_mask_rcnn_R_50_FPN_3x.pkl   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_2cates_norm" >> cascade_mask_rcnn_r_50_2cates_norm.log 2>&1 &
+
+        ## 1 cates
+        #### train from beginning, cascade_rcnn_r101:
+            
+        #### train from 5cls:
+            nohup python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml   Experiments/cascade_mask_rcnn/r_50_norm/model_0023999.pth   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_1cates_norm" >> cascade_mask_rcnn_r_50_1cates_norm.log 2>&1 &
+
+
+        ## infer
+        python tools/train_net.py    --config-file configs/Ped/base.yaml   --eval-only   MODEL.WEIGHTS Experiments/cascade_mask_rcnn/r_50_norm/model_0023999.pth   OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_norm/infer/"
+    
+    #### R101:
+        ## 1 cates
+        #### train from 'ImageNetPretrained':
+            nohup python tools/train_net.py    --num-gpus 4   --resume   --config-file configs/Ped/base.yaml      OUTPUT_DIR "Experiments/cascade_mask_rcnn/r_50_1cates_init" >> cascade_mask_rcnn_r_50_1cates_init.log 2>&1 & 
+
+
+
+
+
+
+
+
+
+
+
