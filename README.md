@@ -5,7 +5,7 @@ Note: Images in 'images/test' are validation set(sorry for bad naming).
 ```
 ./datasets/ped
 ├── annotations
-│   └── dhd_traffic_train_good.json (remove two bad image which can not be read)
+│   └── dhd_traffic_train.json (now training data loader will automatically remove two bad image which can not be read by PIL)
 │   └── dhd_traffic_val.json
 ├── images
 │   └── train
