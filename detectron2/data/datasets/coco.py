@@ -175,8 +175,9 @@ def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_ke
         if is_train and image_id not in img_ids_in_valid_cat:
             num_instances_ignored += 1
             continue
-        # if is_train and img_dict["file_name"] in ['1502445483179.jpg', '1502433988638.jpg']:
-        #     continue
+        # ignore bad image failed to read by PIL
+        if is_train and img_dict["file_name"] in ['1502445483179.jpg', '1502433988638.jpg']:
+            continue
 
         objs = []
         for anno in anno_dict_list:
