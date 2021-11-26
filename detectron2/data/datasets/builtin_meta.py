@@ -156,10 +156,10 @@ COCO_CATEGORIES_BKP = [
 #  classes = ('Pedestrian','Cyclist','Car','Truck','Van')
 COCO_CATEGORIES = [
     {"color": [220, 20, 60], "isthing": 1, "id": 1, "name": "Pedestrian"},
-    # {"color": [119, 11, 32], "isthing": 1, "id": 2, "name": "Cyclist"},
-    # {"color": [0, 0, 142],   "isthing": 1, "id": 3, "name": "Car"},
-    # {"color": [0, 0, 230],   "isthing": 1, "id": 4, "name": "Truck"},
-    # {"color": [106, 0, 228], "isthing": 1, "id": 5, "name": "Van"},
+    {"color": [119, 11, 32], "isthing": 1, "id": 2, "name": "Cyclist"},
+    {"color": [0, 0, 142],   "isthing": 1, "id": 3, "name": "Car"},
+    {"color": [0, 0, 230],   "isthing": 1, "id": 4, "name": "Truck"},
+    {"color": [106, 0, 228], "isthing": 1, "id": 5, "name": "Van"},
 ]
 
 # fmt: off

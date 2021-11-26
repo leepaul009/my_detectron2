@@ -62,9 +62,9 @@ def load_coco_json(json_file, image_root, dataset_name=None, extra_annotation_ke
            The results do not have the "image" field.
     """
     
-    # VALID_CLASSES = ('Pedestrian','Cyclist','Car','Truck','Van')
+    VALID_CLASSES = ('Pedestrian','Cyclist','Car','Truck','Van')
     # VALID_CLASSES = ('Pedestrian','Cyclist')
-    VALID_CLASSES = ('Pedestrian')
+    # VALID_CLASSES = ('Pedestrian')
 
     from pycocotools.coco import COCO
 
